@@ -224,7 +224,7 @@ if (document.readyState === 'loading') {
     new RegistrationForm();
 }
 
-// Lazy load background video
+// Load and play background video
 document.addEventListener('DOMContentLoaded', () => {
     const video = document.querySelector('.background-video');
     if (video) {
@@ -234,13 +234,35 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        // Lazy load video
+        // Load video
         video.load();
         
+        // Ensure video plays (some browsers require explicit play)
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.warn('Video autoplay failed:', error);
+                // Try playing again after user interaction
+                document.addEventListener('click', () => {
+                    video.play().catch(() => {});
+                }, { once: true });
+            });
+        }
+        
         // Handle video loading errors
-        video.addEventListener('error', () => {
-            console.warn('Background video failed to load, using fallback');
+        video.addEventListener('error', (e) => {
+            console.warn('Background video failed to load, using fallback', e);
             video.style.display = 'none';
+        });
+        
+        // Log when video starts playing
+        video.addEventListener('playing', () => {
+            console.log('Background video is playing');
+        });
+        
+        // Log when video is loaded
+        video.addEventListener('loadeddata', () => {
+            console.log('Background video loaded');
         });
     }
 });
