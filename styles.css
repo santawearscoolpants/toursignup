@@ -1,0 +1,783 @@
+/* ============================================
+   CSS Variables - Matching Exact Design
+   ============================================ */
+:root {
+    /* Colors - Matching Image */
+    --color-yellow: #FFD700;
+    --color-yellow-bright: #FFEB3B;
+    --color-white: #FFFFFF;
+    --color-brown-dark: #4A3D32;
+    --color-brown: #6B5B4D;
+    --color-brown-light: #8B7A6B;
+    --color-charcoal: #1A1A1A;
+    --color-sand: #D4C5A9;
+    --color-text-dark: #2C2C2C;
+    
+    /* Typography */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    
+    /* Transitions */
+    --transition-base: 300ms ease;
+    --transition-slow: 500ms ease;
+    
+    /* Shadows */
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-white);
+    background-color: var(--color-charcoal);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ============================================
+   Background Video & Overlay
+   ============================================ */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    opacity: 0.3;
+    filter: blur(8px) brightness(0.4);
+    transition: opacity var(--transition-slow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .background-video {
+        display: none;
+    }
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(26, 26, 26, 0.85) 0%,
+        rgba(44, 44, 44, 0.75) 50%,
+        rgba(26, 26, 26, 0.85) 100%
+    );
+    z-index: 1;
+}
+
+.background-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(139, 139, 111, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(184, 149, 106, 0.15) 0%, transparent 60%),
+        var(--color-charcoal);
+    z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .background-fallback {
+        animation: none;
+    }
+}
+
+/* ============================================
+   Container & Layout
+   ============================================ */
+.container {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.logo-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.logo-image {
+    height: 48px;
+    width: auto;
+}
+
+.logo-fallback {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-yellow), #FFA500);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.logo-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--color-white);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+
+.logo-reset {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 300;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    color: var(--color-white);
+}
+
+.logo-global {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-white);
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    max-width: 1400px;
+    width: 100%;
+    align-items: start;
+}
+
+/* ============================================
+   Event Poster (Left Column) - Flyer Image
+   ============================================ */
+.event-poster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.flyer-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    display: block;
+}
+
+.poster-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.gctu-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.gctu-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-dark);
+    line-height: 1.3;
+}
+
+/* Speakers Section */
+.speakers-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+}
+
+.speaker-main {
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.speaker-photo {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: var(--spacing-xs);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.speaker-photo-main {
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.speakers-secondary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+}
+
+.speaker-item {
+    text-align: center;
+}
+
+.speaker-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-top: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Event Title Section */
+.event-title-section {
+    margin: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.event-title {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
+    word-wrap: break-word;
+}
+
+.event-title .university-word {
+    display: block;
+    font-size: 1.3em;
+    line-height: 0.9;
+}
+
+.event-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.event-logo-small {
+    height: 40px;
+    width: auto;
+}
+
+.gctu-logo-square {
+    width: 50px;
+    height: 50px;
+    background: #1E88E5;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-weight: 700;
+    position: relative;
+}
+
+.gctu-square-text {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.gctu-star {
+    font-size: 0.875rem;
+    margin-top: 2px;
+}
+
+/* Event Details */
+.event-details {
+    margin: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.event-date {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.event-time-location {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.event-time,
+.event-location {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.detail-icon {
+    font-size: 1.25rem;
+}
+
+/* Contact Information */
+.event-contact {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 2px solid rgba(44, 44, 44, 0.2);
+    text-align: center;
+}
+
+.event-contact p {
+    font-size: 0.875rem;
+    color: var(--color-text-dark);
+    font-weight: 500;
+}
+
+.event-contact a {
+    color: var(--color-text-dark);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.event-contact a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   Form Section (Right Column) - Dark Brown
+   ============================================ */
+.form-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.form-card {
+    background: var(--color-brown-dark);
+    border-radius: 12px;
+    padding: var(--spacing-xl);
+    width: 100%;
+    max-width: 500px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+}
+
+.form-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-banner {
+    background: var(--color-yellow);
+    color: var(--color-text-dark);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.banner-icon {
+    font-size: 1.125rem;
+}
+
+.form-instruction {
+    color: var(--color-sand);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-top: var(--spacing-sm);
+}
+
+/* ============================================
+   Form Elements
+   ============================================ */
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-sand);
+}
+
+.label-icon {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-brown);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    transition: all var(--transition-base);
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: var(--color-brown-light);
+    opacity: 0.6;
+}
+
+.form-input:focus {
+    border-color: var(--color-yellow);
+    background: var(--color-brown-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.form-input:invalid:not(:placeholder-shown) {
+    border-color: #c66;
+}
+
+.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4c5a9' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--spacing-md) center;
+    padding-right: calc(var(--spacing-md) + 20px);
+    cursor: pointer;
+}
+
+.error-message {
+    font-size: 0.75rem;
+    color: #ff6b6b;
+    min-height: 1.25rem;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: all var(--transition-base);
+}
+
+.error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   Submit Button
+   ============================================ */
+.submit-button {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--color-yellow);
+    color: var(--color-text-dark);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.submit-button:hover:not(:disabled) {
+    background: var(--color-yellow-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+.submit-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.submit-button:focus {
+    outline: 2px solid var(--color-yellow);
+    outline-offset: 2px;
+}
+
+.button-loader {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(44, 44, 44, 0.3);
+    border-top-color: var(--color-text-dark);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.submit-button.loading .button-text {
+    opacity: 0;
+}
+
+.submit-button.loading .button-loader {
+    display: block;
+    position: absolute;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   Success Message
+   ============================================ */
+.success-message {
+    display: none;
+    text-align: center;
+    padding: var(--spacing-xl);
+    animation: fadeInUp var(--transition-slow) ease;
+}
+
+.success-message.show {
+    display: block;
+}
+
+.success-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-md);
+    background: var(--color-yellow);
+    color: var(--color-text-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    animation: scaleIn var(--transition-base) ease;
+}
+
+.success-title {
+    font-family: var(--font-sans);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
+}
+
+.success-text {
+    color: var(--color-sand);
+    line-height: 1.8;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+}
+
+.copyright {
+    font-size: 0.75rem;
+    color: var(--color-brown-light);
+    opacity: 0.7;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 968px) {
+    .content-wrapper {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+    
+    .event-poster {
+        order: 2;
+    }
+    
+    .form-section {
+        order: 1;
+    }
+    
+    .speakers-secondary {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .form-card,
+    .event-poster {
+        padding: var(--spacing-lg);
+    }
+    
+    .event-title {
+        font-size: 1.5rem;
+    }
+    
+    .gctu-title {
+        font-size: 0.75rem;
+    }
+    
+    .speaker-photo-main {
+        max-width: 180px;
+    }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+*:focus-visible {
+    outline: 2px solid var(--color-yellow);
+    outline-offset: 2px;
+}
+
+@media (prefers-contrast: high) {
+    .form-input {
+        border-width: 3px;
+    }
+    
+    .submit-button {
+        border: 2px solid var(--color-text-dark);
+    }
+}

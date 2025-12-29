@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for What I Wish I Knew Before I Left University - GCTU Event">
+    <title>Event Registration - GCTU</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-container">
+        <video class="background-video" autoplay muted loop playsinline>
+            <source src="assets/background-video.mp4" type="video/mp4">
+            <source src="assets/background-video.webm" type="video/webm">
+        </video>
+        <div class="background-overlay"></div>
+        <div class="background-fallback"></div>
+    </div>
+
+    <div class="container">
+        <header class="logo-header">
+            <div class="logo">
+                <img src="assets/logos/reset-global-people-logo.png" alt="Reset Global People" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display: none;">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <span class="logo-reset">reset</span>
+                        <span class="logo-global">GLOBAL PEOPLE</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- Left Column: Event Poster -->
+                <aside class="event-poster">
+                    <img src="assets/images/flyer.jpg" alt="What I Wish I Knew Before I Left University - Tour Flyer" class="flyer-image">
+                </aside>
+
+                <!-- Right Column: Registration Form -->
+                <section class="form-section">
+                    <div class="form-card">
+                        <div class="form-header">
+                            <div class="form-banner">
+                                <span class="banner-icon">☀</span>
+                                <span class="banner-text">Secure your place</span>
+                            </div>
+                            <p class="form-instruction">Fill in your details below for important updates!</p>
+                        </div>
+
+                        <form id="registrationForm" class="registration-form" novalidate>
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">
+                                    <span class="label-icon">👤</span>
+                                    <span class="label-text">FULL NAME</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="fullName" 
+                                    name="fullName" 
+                                    class="form-input" 
+                                    placeholder="eg. Santa Elijah"
+                                    required
+                                    autocomplete="name"
+                                >
+                                <span class="error-message" id="fullNameError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">
+                                    <span class="label-icon">✉</span>
+                                    <span class="label-text">EMAIL ADDRESS</span>
+                                </label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="form-input" 
+                                    placeholder="eg. name@example.com"
+                                    required
+                                    autocomplete="email"
+                                >
+                                <span class="error-message" id="emailError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone" class="form-label">
+                                    <span class="label-icon">📞</span>
+                                    <span class="label-text">PHONE</span>
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    name="phone" 
+                                    class="form-input" 
+                                    placeholder="eg. 0249097323"
+                                    required
+                                    autocomplete="tel"
+                                >
+                                <span class="error-message" id="phoneError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="whatsapp" class="form-label">
+                                    <span class="label-icon">💬</span>
+                                    <span class="label-text">WHATSAPP</span>
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="whatsapp" 
+                                    name="whatsapp" 
+                                    class="form-input" 
+                                    placeholder="eg. 0594849077"
+                                    required
+                                    autocomplete="tel"
+                                >
+                                <span class="error-message" id="whatsappError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="hearAbout" class="form-label">
+                                    <span class="label-icon">📋</span>
+                                    <span class="label-text">HOW DID YOU HEAR ABOUT THE EVENT?</span>
+                                </label>
+                                <select 
+                                    id="hearAbout" 
+                                    name="hearAbout" 
+                                    class="form-input form-select"
+                                    required
+                                >
+                                    <option value="">Select an option</option>
+                                    <option value="social-media">Social Media</option>
+                                    <option value="friend">Friend/Colleague</option>
+                                    <option value="university">University/Institution</option>
+                                    <option value="email">Email Newsletter</option>
+                                    <option value="website">Website</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <span class="error-message" id="hearAboutError"></span>
+                            </div>
+
+                            <button type="submit" class="submit-button" id="submitButton">
+                                <span class="button-text">REGISTER</span>
+                                <span class="button-loader" id="buttonLoader"></span>
+                            </button>
+                        </form>
+
+                        <div class="success-message" id="successMessage">
+                            <div class="success-icon">✓</div>
+                            <h3 class="success-title">Registration Successful!</h3>
+                            <p class="success-text">We've sent a confirmation to your email and phone. Check your inbox for next steps.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p class="copyright">Copyright © 2025 ResetGlobalPeople. All Rights Reseved</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
